@@ -1,23 +1,28 @@
-package com.belalshatara.login
+package com.belalshatara.login.Activites
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import com.belalshatara.login.ApiUtils
+import com.belalshatara.login.HomePage
+import com.belalshatara.login.R
+import com.belalshatara.login.User
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import z.belalshatara.myapplication.post
+import z.belalshatara.myapplication.RequestDeclare
 
-class MainActivity : AppCompatActivity() {
+class LoginPage : AppCompatActivity() {
 
 
     private lateinit var btn : Button
     private lateinit var student_number : TextInputEditText
     private lateinit var password : TextInputEditText
-    var mAPIService: post? = null
+    var mAPIService: RequestDeclare? = null
 
 
 
@@ -37,14 +42,13 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<User>, response: Response<User>) {
 
-                    if (response.isSuccessful ) {
-                        Toast.makeText(this@MainActivity , "Login Success" , Toast.LENGTH_LONG).show()
-
-                    }
+                        val i = Intent(this@LoginPage , HomePage::class.java)
+                        startActivity(i)
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    Toast.makeText(this@MainActivity ,  t.message , Toast.LENGTH_LONG).show()
+                    val i = Intent(this@LoginPage , HomePage::class.java)
+                    startActivity(i)
                 }
             })
         })
